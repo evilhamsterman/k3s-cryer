@@ -1,0 +1,24 @@
+# https://taskfile.dev
+
+version: "3"
+
+tasks:
+  default:
+    cmds:
+      - task: build
+      - task: install
+    silent: true
+
+  build:
+    env:
+      CGO_ENABLED: 0
+    generates:
+      - bin/k3s-cryer
+    sources:
+      - "*.go"
+    cmd: go build -o bin/k3s-cryer
+
+  install:
+    cmds:
+      - mkdir -p $HOME/.local/bin
+      - cp bin/k3s-cryer $HOME/.local/bin
