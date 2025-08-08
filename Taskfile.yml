@@ -19,6 +19,8 @@ tasks:
     cmd: go build -o bin/k3s-cryer
 
   install:
-    cmds:
-      - mkdir -p $HOME/.local/bin
-      - cp bin/k3s-cryer $HOME/.local/bin
+    env:
+      CGO_ENABLED: 0
+    sources:
+      - "*.go"
+    cmd: go install .
